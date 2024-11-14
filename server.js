@@ -22,5 +22,5 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
-  console.log(`Documentación de API en http://localhost:${PORT}/api-docs`);
+  console.log(`Documentación de API en https://appiexamrecu.onrender.com/api-docs/`);
 });
