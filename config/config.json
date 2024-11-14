@@ -1,0 +1,33 @@
+{
+  "development": {
+    "username": "usr_DesaWeb",
+    "password": "GuasTa360#",
+    "database": "db_banco",
+    "host": "svr-sql-ctezo.southcentralus.cloudapp.azure.com",
+    "dialect": "mssql",
+    "port": 1433,
+    "dialectOptions": {
+      "options": {
+        "encrypt": true,
+        "trustServerCertificate": true,
+        "enableArithAbort": true
+      }
+    }
+  },
+  "test": {
+    "username": "tu_usuario_sql_server",
+    "password": "tu_contraseña",
+    "database": "nombre_base_datos_test",
+    "host": "nombre_servidor_o_ip",
+    "dialect": "mssql",
+    "port": 1433
+  },
+  "production": {
+    "username": "tu_usuario_sql_server",
+    "password": "tu_contraseña",
+    "database": "nombre_base_datos_production",
+    "host": "nombre_servidor_o_ip",
+    "dialect": "mssql",
+    "port": 1433
+  }
+}
