@@ -71,6 +71,56 @@ router.post('/events', eventController.createEvent);
  */
 router.get('/events', eventController.getAllEvents);
 
+// Obtener todos los asistentes de un evento por ID
+/**
+ * @swagger
+ * /events/{eventId}/attendees:
+ *   get:
+ *     summary: Obtener todos los asistentes de un evento
+ *     description: Devuelve una lista de asistentes para un evento especificado por su ID.
+ *     parameters:
+ *       - name: eventId
+ *         in: path
+ *         required: true
+ *         description: ID del evento para obtener los asistentes.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Lista de asistentes obtenida exitosamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                     example: "Juan Pérez"
+ *                   email:
+ *                     type: string
+ *                     example: "juan.perez@example.com"
+ *                   Event:
+ *                     type: object
+ *                     properties:
+ *                       title:
+ *                         type: string
+ *                         example: "Conferencia de Tecnología"
+ *                   Role:
+ *                     type: object
+ *                     properties:
+ *                       name:
+ *                         type: string
+ *                         example: "Participante"
+ *       404:
+ *         description: No se encontraron asistentes para este evento.
+ *       500:
+ *         description: Error al obtener los asistentes.
+ */
+router.get('/events/:eventId/attendees', eventController.getAttendeesByEventId);
+
+
 /**
  * @swagger
  * /events/{id}:
