@@ -27,7 +27,7 @@ module.exports = {
       const { eventId } = req.params;
       const attendees = await Attendee.findAll({
         where: { eventId },
-        attributes: ["name", "email"], // Ajusta según los campos que quieras incluir
+        attributes: ["id","name", "email"], // Ajusta según los campos que quieras incluir
         include: [
           {
             model: Event,
