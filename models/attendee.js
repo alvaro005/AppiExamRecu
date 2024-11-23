@@ -25,6 +25,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      state: {
+        type: DataTypes.BOOLEAN,  // Cambiado a BOOLEAN
+        defaultValue: true,       // Valor predeterminado es 'true'
+      },
       createdAt: {
         type: DataTypes.DATE,
         defaultValue: sequelize.literal('GETDATE()'), // Usar la función GETDATE() de SQL Server

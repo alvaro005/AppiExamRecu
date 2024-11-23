@@ -29,6 +29,9 @@ const router = express.Router();
  *         roleId:
  *           type: integer
  *           description: ID del rol asignado al asistente
+ *         state:
+ *           type: boolean  # Cambiar de 'string' a 'boolean'
+ *           description: Estado del asistente (true para activo, false para inactivo)
  */
 
 /**
@@ -125,9 +128,9 @@ router.put('/attendees/:id', attendeeController.updateAttendee);
 
 /**
  * @swagger
- * /attendees/{id}:
- *   delete:
- *     summary: Elimina un asistente por ID
+ * /attendees/{id}/state:
+ *   put:
+ *     summary: Actualiza el estado de un asistente por ID
  *     tags: [Attendee]
  *     parameters:
  *       - in: path
@@ -136,14 +139,29 @@ router.put('/attendees/:id', attendeeController.updateAttendee);
  *           type: integer
  *         required: true
  *         description: ID del asistente
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               state:
+ *                 type: boolean  # Cambiar de 'string' a 'boolean'
+ *                 description: Nuevo estado del asistente (true para activo, false para inactivo)
+ *                 example: true  # Ejemplo con el valor 'true' (activo)
+ *             required:
+ *               - state
  *     responses:
  *       204:
- *         description: Asistente eliminado exitosamente
+ *         description: Estado del asistente actualizado exitosamente
+ *       400:
+ *         description: El estado debe ser true o false
  *       404:
  *         description: Asistente no encontrado
  *       500:
- *         description: Error al eliminar el asistente
+ *         description: Error al actualizar el estado del asistente
  */
-router.delete('/attendees/:id', attendeeController.deleteAttendee);
+router.put('/attendees/:id/state', attendeeController.updateAttendeeState);
 
 module.exports = router;
