@@ -5,12 +5,13 @@ module.exports = {
   // Crear un nuevo evento
   async createEvent(req, res) {
     try {
-      const { title, description, date, eventTypeId } = req.body;
+      const { title, description, date, eventTypeId, hour } = req.body;
       const event = await Event.create({
         title,
         description,
         date,
         eventTypeId,
+        hour
       });
       return res.status(201).json(event);
     } catch (error) {
@@ -31,7 +32,7 @@ module.exports = {
         include: [
           {
             model: Event,
-            attributes: ["title"], // Puedes incluir información del evento si es necesario
+            attributes: ["title", "hour"], // Puedes incluir información del evento si es necesario
           },
           {
             model: Role,
@@ -97,12 +98,12 @@ module.exports = {
   async updateEvent(req, res) {
     try {
       const { id } = req.params;
-      const { title, description, date, eventTypeId } = req.body;
+      const { title, description, date, eventTypeId, hour } = req.body;
       const event = await Event.findByPk(id);
       if (!event) {
         return res.status(404).json({ message: "Evento no encontrado" });
       }
-      await event.update({ title, description, date, eventTypeId });
+      await event.update({ title, description, date, eventTypeId, hour });
       return res.status(200).json(event);
     } catch (error) {
       console.error(error);
@@ -121,7 +122,8 @@ module.exports = {
         return res.status(404).json({ message: "Evento no encontrado" });
       }
       await event.destroy();
-      return res.status(204).json();
+      return res.status(200).json({ message: "Evento eliminado correctamente" });
+
     } catch (error) {
       console.error(error);
       return res

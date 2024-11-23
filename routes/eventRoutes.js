@@ -1,4 +1,3 @@
-// routes/eventRoutes.js
 const express = require('express');
 const eventController = require('../controllers/eventController');
 const router = express.Router();
@@ -12,6 +11,7 @@ const router = express.Router();
  *       required:
  *         - title
  *         - date
+ *         - hour
  *       properties:
  *         id:
  *           type: integer
@@ -26,6 +26,10 @@ const router = express.Router();
  *           type: string
  *           format: date
  *           description: Fecha del evento
+ *         hour:
+ *           type: string
+ *           format: time
+ *           description: Hora del evento (formato HH:mm:ss)
  *         eventTypeId:
  *           type: integer
  *           description: ID del tipo de evento
@@ -71,7 +75,6 @@ router.post('/events', eventController.createEvent);
  */
 router.get('/events', eventController.getAllEvents);
 
-// Obtener todos los asistentes de un evento por ID
 /**
  * @swagger
  * /events/{eventId}/attendees:
@@ -107,6 +110,9 @@ router.get('/events', eventController.getAllEvents);
  *                       title:
  *                         type: string
  *                         example: "Conferencia de Tecnología"
+ *                       hour:
+ *                         type: string
+ *                         example: "14:00:00"
  *                   Role:
  *                     type: object
  *                     properties:
@@ -119,7 +125,6 @@ router.get('/events', eventController.getAllEvents);
  *         description: Error al obtener los asistentes.
  */
 router.get('/events/:eventId/attendees', eventController.getAttendeesByEventId);
-
 
 /**
  * @swagger
@@ -187,7 +192,7 @@ router.put('/events/:id', eventController.updateEvent);
  *         required: true
  *         description: ID del evento
  *     responses:
- *       204:
+ *       200:
  *         description: Evento eliminado exitosamente
  *       404:
  *         description: Evento no encontrado
